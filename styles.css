@@ -1,68 +1,174 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+/* General Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f9;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
     color: #333;
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     margin: 0;
-    padding: 0;
-    transition: 0.3s;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode {
+    background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+    color: #f4f4f4;
 }
 
 .container {
-    max-width: 600px;
-    margin: 50px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    text-align: center;
+    transition: background 0.3s, color 0.3s;
+}
+
+body.dark-mode .container {
+    background: rgba(40, 40, 60, 0.8);
+    color: #f4f4f4;
 }
 
 h1 {
-    color: #ff7b00;
-}
-
-button {
-    background: #ff9800;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    font-size: 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.3s;
-    margin: 5px;
-}
-
-button:hover {
-    background: #e68900;
-}
-
-.output-box {
+    margin-bottom: 20px;
     font-size: 24px;
-    margin-top: 10px;
-    padding: 10px;
-    background: #fff3cd;
-    border-radius: 6px;
-    min-height: 40px;
-    word-wrap: break-word;
+    font-weight: 600;
+    color: #333;
 }
 
-/* Dark Mode */
-.dark-mode {
-    background-color: #1e1e1e;
-    color: white;
+body.dark-mode h1 {
+    color: #f4f4f4;
 }
 
-.dark-mode .container {
-    background-color: #333;
+textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.7);
+    resize: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
-.dark-mode button {
-    background: #777;
+body.dark-mode textarea {
+    background: rgba(50, 50, 70, 0.7);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #f4f4f4;
 }
 
-.dark-mode .output-box {
-    background: #444;
+textarea:focus {
+    outline: none;
+    border-color: #6a11cb;
+    box-shadow: 0 0 8px rgba(106, 17, 203, 0.3);
+}
+
+.controls {
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+select, input[type="number"], button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+}
+
+body.dark-mode select, body.dark-mode input[type="number"], body.dark-mode button {
+    background: rgba(50, 50, 70, 0.9);
+    color: #f4f4f4;
+}
+
+select:hover, input[type="number"]:hover, button:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-mode select:hover, body.dark-mode input[type="number"]:hover, body.dark-mode button:hover {
+    background: rgba(70, 70, 90, 1);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+.char-count {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+body.dark-mode .char-count {
+    color: #aaa;
+}
+
+.mode-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+#themeToggle {
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333;
+    font-size: 14px;
+    transition: background 0.3s, transform 0.2s;
+}
+
+body.dark-mode #themeToggle {
+    background: rgba(50, 50, 70, 0.9);
+    color: #f4f4f4;
+}
+
+#themeToggle:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-2px);
+}
+
+body.dark-mode #themeToggle:hover {
+    background: rgba(70, 70, 90, 1);
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.qr-code-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.qr-code-container img {
+    max-width: 100%;
+    border-radius: 12px;
 }

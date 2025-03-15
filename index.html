@@ -3,55 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emoji Secret Message</title>
+    <title>Secret Message Encoder</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-
     <div class="container">
-        <h1>🔐 Emoji Secret Message</h1>
-        <button id="darkModeToggle">🌙 Toggle Dark Mode</button>
-
-        <div class="box">
-            <h2>📝 Encode Message</h2>
-            <input type="text" id="inputText" placeholder="Enter your message...">
-            <select id="encodingMode">
-                <option value="default">🔠 Single Emoji per Letter</option>
-                <option value="multi">🎭 Multi-Emoji Encoding</option>
+        <h1>Secret Message Encoder</h1>
+        <div class="mode-toggle">
+            <button id="themeToggle">🌙 Dark Mode</button>
+        </div>
+        <textarea id="inputText" placeholder="Enter your message here..." oninput="handleInput()"></textarea>
+        <div class="char-count">
+            <span id="inputCharCount">0</span> characters
+        </div>
+        <div class="controls">
+            <label for="encodingMethod">Method:</label>
+            <select id="encodingMethod">
+                <option value="caesar">Caesar Cipher</option>
+                <option value="base64">Base64</option>
+                <option value="binary">Binary</option>
+                <option value="rot13">ROT13</option>
+                <option value="hex">Hexadecimal</option>
+                <option value="emoji">Emoji</option>
             </select>
-            <button onclick="convertToEmoji()">Encode</button>
-            <button onclick="saveMessage()">💾 Save Message</button>
-            <button onclick="generateShareableLink()">🔗 Share Link</button>
-            <button onclick="copyToClipboard('output')">📋 Copy</button>
-            <button onclick="downloadImage()">📷 Download as Image</button>
-            <div id="output" class="output-box"></div>
+            <label for="shift">Shift:</label>
+            <input type="number" id="shift" value="3" min="1" max="25" disabled>
+            <button onclick="encodeMessage()">Encode</button>
+            <button onclick="decodeMessage()">Decode</button>
+            <button onclick="clearText()">Clear</button>
+            <button onclick="randomizeEncoding()">🎲 Randomize</button>
         </div>
-
-        <div class="box">
-            <h2>🔍 Decode Message</h2>
-            <textarea id="emojiInput" rows="2" placeholder="Paste emoji message here..." oninput="autoDetect()"></textarea>
-            <button onclick="convertToText()">Decode</button>
-            <button onclick="copyToClipboard('decodedOutput')">📋 Copy</button>
-            <div id="decodedOutput" class="output-box"></div>
+        <textarea id="outputText" readonly placeholder="Your encoded/decoded message will appear here..."></textarea>
+        <div class="char-count">
+            <span id="outputCharCount">0</span> characters
         </div>
-
-        <div class="box">
-            <h2>📱 QR Code Generator</h2>
-            <button onclick="generateQRCode()">Generate QR Code</button>
-            <div id="qrcode"></div>
+        <div class="actions">
+            <button onclick="copyToClipboard()">📋 Copy to Clipboard</button>
+            <button onclick="exportOutput()">📥 Export as Text File</button>
+            <button onclick="generateQRCode()">🖼️ Generate QR Code</button>
         </div>
-
-        <div class="box">
-            <h2>🔡 Current Emoji Mapping</h2>
-            <input type="text" id="searchLetter" placeholder="Search for a letter..." onkeyup="searchEmoji()">
-            <div id="emojiTable"></div>
-            <button onclick="exportEmojiMapping()">📤 Export Mapping</button>
-            <input type="file" id="importFile" accept=".json" onchange="importEmojiMapping()">
-        </div>
+        <div id="qrCodeContainer" class="qr-code-container"></div>
     </div>
-
     <script src="script.js"></script>
-
 </body>
 </html>
