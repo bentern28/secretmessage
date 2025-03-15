@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Secret Message</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs/qrcode.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🔐 Emoji Secret Message</h1>
+        <button id="darkModeToggle">🌙 Toggle Dark Mode</button>
+
+        <div class="box">
+            <h2>📝 Encode Message</h2>
+            <input type="text" id="inputText" placeholder="Enter your message...">
+            <select id="encodingMode">
+                <option value="default">🔠 Single Emoji per Letter</option>
+                <option value="multi">🎭 Multi-Emoji Encoding</option>
+            </select>
+            <button onclick="convertToEmoji()">Encode</button>
+            <button onclick="saveMessage()">💾 Save Message</button>
+            <button onclick="generateShareableLink()">🔗 Share Link</button>
+            <button onclick="copyToClipboard('output')">📋 Copy</button>
+            <button onclick="downloadImage()">📷 Download as Image</button>
+            <div id="output" class="output-box"></div>
+        </div>
+
+        <div class="box">
+            <h2>🔍 Decode Message</h2>
+            <textarea id="emojiInput" rows="2" placeholder="Paste emoji message here..." oninput="autoDetect()"></textarea>
+            <button onclick="convertToText()">Decode</button>
+            <button onclick="copyToClipboard('decodedOutput')">📋 Copy</button>
+            <div id="decodedOutput" class="output-box"></div>
+        </div>
+
+        <div class="box">
+            <h2>📱 QR Code Generator</h2>
+            <button onclick="generateQRCode()">Generate QR Code</button>
+            <div id="qrcode"></div>
+        </div>
+
+        <div class="box">
+            <h2>🔡 Current Emoji Mapping</h2>
+            <input type="text" id="searchLetter" placeholder="Search for a letter..." onkeyup="searchEmoji()">
+            <div id="emojiTable"></div>
+            <button onclick="exportEmojiMapping()">📤 Export Mapping</button>
+            <input type="file" id="importFile" accept=".json" onchange="importEmojiMapping()">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
